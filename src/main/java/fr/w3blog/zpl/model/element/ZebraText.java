@@ -3,6 +3,7 @@ package fr.w3blog.zpl.model.element;
 import fr.w3blog.zpl.constant.ZebraFont;
 import fr.w3blog.zpl.constant.ZebraRotation;
 import fr.w3blog.zpl.model.PrinterOptions;
+import fr.w3blog.zpl.model.ZebraElement;
 import fr.w3blog.zpl.utils.ZplUtils;
 
 /**

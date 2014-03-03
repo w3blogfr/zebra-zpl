@@ -5,7 +5,6 @@ import java.util.List;
 
 import fr.w3blog.zpl.constant.ZebraFont;
 import fr.w3blog.zpl.constant.ZebraPrintMode;
-import fr.w3blog.zpl.model.element.ZebraElement;
 import fr.w3blog.zpl.utils.ZplUtils;
 
 public class ZebraLabel {

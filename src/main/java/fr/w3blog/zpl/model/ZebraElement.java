@@ -1,6 +1,5 @@
-package fr.w3blog.zpl.model.element;
+package fr.w3blog.zpl.model;
 
-import fr.w3blog.zpl.model.PrinterOptions;
 import fr.w3blog.zpl.utils.ZplUtils;
 
 public abstract class ZebraElement {
