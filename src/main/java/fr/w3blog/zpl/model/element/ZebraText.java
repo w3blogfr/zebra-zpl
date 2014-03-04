@@ -1,5 +1,8 @@
 package fr.w3blog.zpl.model.element;
 
+import java.awt.Font;
+import java.awt.Graphics2D;
+
 import fr.w3blog.zpl.constant.ZebraFont;
 import fr.w3blog.zpl.constant.ZebraRotation;
 import fr.w3blog.zpl.model.PrinterOptions;
@@ -88,16 +91,58 @@ public class ZebraText extends ZebraElement {
 
 		if (fontSize != null && zebraFont != null) {
 			//This element has specified size and font
-			zpl.append(ZplUtils.zplCommand("A", zebraFont.getLetter(), zebraRotation.getLetter(), ZplUtils.extractDotsFromFont(zebraFont, fontSize, printerOptions.getZebraPPP())));
+			Integer[] dimension = ZplUtils.extractDotsFromFont(zebraFont, fontSize, printerOptions.getZebraPPP());
+			zpl.append(ZplUtils.zplCommand("A", zebraFont.getLetter(), zebraRotation.getLetter(), dimension[0], dimension[1]));
 		} else if (fontSize != null && printerOptions.getDefaultZebraFont() != null) {
 			//This element has specified size, but with default font
-			zpl.append(ZplUtils.zplCommand("A", zebraFont.getLetter(), zebraRotation.getLetter(), ZplUtils.extractDotsFromFont(printerOptions.getDefaultZebraFont(), fontSize, printerOptions.getZebraPPP())));
+			Integer[] dimension = ZplUtils.extractDotsFromFont(printerOptions.getDefaultZebraFont(), fontSize, printerOptions.getZebraPPP());
+			zpl.append(ZplUtils.zplCommand("A", printerOptions.getDefaultZebraFont().getLetter(), zebraRotation.getLetter(), dimension[0], dimension[1]));
 		}
 
-		zpl.append(ZplUtils.zplCommand("FH"));
-		zpl.append(text);
-		zpl.append(ZplUtils.zplCommand("FS"));
+		zpl.append("^FH\\^FD");//We allow hexadecimal and start element
+		zpl.append(ZplUtils.convertAccentToZplAsciiHexa(text));
+		zpl.append(ZplUtils.zplCommandSautLigne("FS"));
 
 		return zpl.toString();
+	}
+
+	/**
+	 * Used to draw label preview.
+	 * This method should be overloader by child class.
+	 * 
+	 * Default draw a rectangle
+	 * 
+	 * @param graphic
+	 */
+	public void drawPreviewGraphic(PrinterOptions printerOptions, Graphics2D graphic) {
+		if (defaultDrawGraphic) {
+			int top = 0;
+			int left = 0;
+			if (positionX != null) {
+				left = ZplUtils.convertPointInPixel(positionX);
+			}
+			if (positionY != null) {
+				top = ZplUtils.convertPointInPixel(positionY);
+			}
+
+			Font font = null;
+
+			if (fontSize != null && zebraFont != null) {
+				//This element has specified size and font
+				Integer[] dimension = ZplUtils.extractDotsFromFont(printerOptions.getDefaultZebraFont(), fontSize, printerOptions.getZebraPPP());
+
+				font = new Font(ZebraFont.findBestEquivalentFontForPreview(zebraFont), Font.BOLD, dimension[0]);
+			} else if (fontSize != null && printerOptions.getDefaultZebraFont() != null) {
+				//This element has specified size, but with default font
+				Integer[] dimensionPoint = ZplUtils.extractDotsFromFont(printerOptions.getDefaultZebraFont(), fontSize, printerOptions.getZebraPPP());
+				font = new Font(ZebraFont.findBestEquivalentFontForPreview(printerOptions.getDefaultZebraFont()), Font.BOLD, Math.round(dimensionPoint[0] / 1.33F));
+			} else {
+				//Default font on Printer Zebra
+				Integer[] dimensionPoint = ZplUtils.extractDotsFromFont(printerOptions.getDefaultZebraFont(), 15, printerOptions.getZebraPPP());
+
+				font = new Font(ZebraFont.findBestEquivalentFontForPreview(ZebraFont.ZEBRA_A), Font.BOLD, dimensionPoint[0]);
+			}
+			drawTopString(graphic, font, text, left, top);
+		}
 	}
 }

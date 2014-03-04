@@ -1,5 +1,11 @@
 package fr.w3blog.zpl.model;
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,11 +18,11 @@ public class ZebraLabel {
 	/**
 	 * Width explain in dots
 	 */
-	private Integer width;
+	private Integer widthDots;
 	/**
 	 * Height explain in dots
 	 */
-	private Integer height;
+	private Integer heightDots;
 
 	private ZebraPrintMode zebraPrintMode = ZebraPrintMode.TEAR_OFF;
 
@@ -34,16 +40,32 @@ public class ZebraLabel {
 		this.printerOptions = printerOptions;
 	}
 
-	public ZebraLabel(int width, int height) {
+	/**
+	 * Create label with size
+	 * 
+	 * @param heightDots
+	 *            height explain in dots
+	 * @param widthDots
+	 *            width explain in dots
+	 */
+	public ZebraLabel(int widthDots, int heightDots) {
 		super();
-		this.width = width;
-		this.height = height;
+		this.widthDots = widthDots;
+		this.heightDots = heightDots;
 	}
 
-	public ZebraLabel(Integer width, Integer height, PrinterOptions printerOptions) {
+	/**
+	 * 
+	 * @param heightDots
+	 *            height explain in dots
+	 * @param widthDots
+	 *            width explain in dots
+	 * @param printerOptions
+	 */
+	public ZebraLabel(int widthDots, int heightDots, PrinterOptions printerOptions) {
 		super();
-		this.width = width;
-		this.height = height;
+		this.widthDots = widthDots;
+		this.heightDots = heightDots;
 		this.printerOptions = printerOptions;
 	}
 
@@ -83,36 +105,30 @@ public class ZebraLabel {
 		return this;
 	}
 
-	/**
-	 * @return the width
-	 */
-	public int getWidth() {
-		return width;
+	public Integer getWidthDots() {
+		return widthDots;
 	}
 
-	/**
-	 * @param width
-	 *            the width to set
-	 */
-	public ZebraLabel setWidth(int width) {
-		this.width = width;
+	public ZebraLabel setWidthDots(Integer widthDots) {
+		this.widthDots = widthDots;
 		return this;
 	}
 
-	/**
-	 * @return the height
-	 */
-	public int getHeight() {
-		return height;
+	public Integer getHeightDots() {
+		return heightDots;
 	}
 
-	/**
-	 * @param height
-	 *            the height to set
-	 */
-	public ZebraLabel setHeight(int height) {
-		this.height = height;
+	public ZebraLabel setHeightDots(Integer heightDots) {
+		this.heightDots = heightDots;
 		return this;
+	}
+
+	public PrinterOptions getPrinterOptions() {
+		return printerOptions;
+	}
+
+	public void setPrinterOptions(PrinterOptions printerOptions) {
+		this.printerOptions = printerOptions;
 	}
 
 	/**
@@ -152,24 +168,52 @@ public class ZebraLabel {
 		zpl.append(ZplUtils.zplCommand("XA"));//Start Label
 		zpl.append(zebraPrintMode.getZplCode());
 
-		if (width != null) {
+		if (widthDots != null) {
 			//Define width for label
-			zpl.append(ZplUtils.zplCommand("PW", width));
+			zpl.append(ZplUtils.zplCommandSautLigne("PW", widthDots));
 		}
 
-		if (height != null) {
-			zpl.append(ZplUtils.zplCommand("LL", height));
+		if (heightDots != null) {
+			zpl.append(ZplUtils.zplCommandSautLigne("LL", heightDots));
 		}
 
 		//Default Font and Size
 		if (printerOptions.getDefaultZebraFont() != null && printerOptions.getDefaultFontSize() != null) {
-			zpl.append(ZplUtils.zplCommand("CF", ZplUtils.extractDotsFromFont(printerOptions.getDefaultZebraFont(), printerOptions.getDefaultFontSize(), printerOptions.getZebraPPP())));
+			zpl.append(ZplUtils.zplCommandSautLigne("CF", (Object[]) ZplUtils.extractDotsFromFont(printerOptions.getDefaultZebraFont(), printerOptions.getDefaultFontSize(), printerOptions.getZebraPPP())));
 		}
 
 		for (ZebraElement zebraElement : zebraElements) {
 			zpl.append(zebraElement.getZplCode(printerOptions));
 		}
-		zpl.append(ZplUtils.zplCommand("XZ"));//End Label
+		zpl.append(ZplUtils.zplCommandSautLigne("XZ"));//End Label
 		return zpl.toString();
+	}
+
+	/**
+	 * Function use to have a preview of label rendering (not reflects reality).
+	 * 
+	 * Use it just to see disposition on label
+	 * 
+	 * @return Graphics2D
+	 */
+	public BufferedImage getImagePreview() {
+		if (widthDots != null && heightDots != null) {
+			int widthPx = ZplUtils.convertPointInPixel(widthDots);
+			int heightPx = ZplUtils.convertPointInPixel(heightDots);
+			BufferedImage image = new BufferedImage(widthPx, heightPx, BufferedImage.TYPE_INT_ARGB);
+			Graphics2D graphic = image.createGraphics();
+			graphic.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+			graphic.setComposite(AlphaComposite.Src);
+			graphic.fillRect(0, 0, widthPx, heightPx);
+
+			graphic.setColor(Color.BLACK);
+			graphic.setFont(new Font("Arial", Font.BOLD, 11));
+			for (ZebraElement zebraElement : zebraElements) {
+				zebraElement.drawPreviewGraphic(printerOptions, graphic);
+			}
+			return image;
+		} else {
+			throw new UnsupportedOperationException("Graphics Preview is only available ont label sized");
+		}
 	}
 }

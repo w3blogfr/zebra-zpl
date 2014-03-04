@@ -16,6 +16,15 @@ public class ZebraLabelTest
 	public void testZebraLabelAlone()
 	{
 		ZebraLabel zebraLabel = new ZebraLabel();
-		assertEquals("^XA\n^MMT\n^XZ", zebraLabel.getZplCode());
+		assertEquals("^XA\n^MMT\n^XZ\n", zebraLabel.getZplCode());
+	}
+
+	/**
+	 * Test with only label without element
+	 */
+	public void testZebraLabelSize()
+	{
+		ZebraLabel zebraLabel = new ZebraLabel(760, 500);
+		assertEquals("^XA\n^MMT\n^PW500\n^LL760\n^XZ\n", zebraLabel.getZplCode());
 	}
 }

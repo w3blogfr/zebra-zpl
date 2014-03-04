@@ -16,6 +16,7 @@ public class ZebraNativeZpl extends ZebraElement {
 	public ZebraNativeZpl(String zplCode) {
 		super();
 		this.zplCode = zplCode;
+		this.defaultDrawGraphic = false;
 	}
 
 	/* (non-Javadoc)
