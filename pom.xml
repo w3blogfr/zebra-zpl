@@ -4,19 +4,51 @@
 
   <groupId>fr.w3blog</groupId>
   <artifactId>zebra-zpl</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>zebra-zpl</name>
+  <description>Java Api for Zepra Zpl generator</description>
   <url>https://github.com/w3blogfr/zebra-zpl</url>
   
-  <scm>
-    <url>git@github.com:w3blogfr/zebra-zpl.git</url>
-  </scm>
+	<licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  
+	<scm>
+		<connection>scm:git:git://github.com/w3blogfr/zebra-zpl.git</connection>
+		<developerConnection>scm:git:git@github.com:w3blogfr/zebra-zpl.git</developerConnection>
+		<url>http://github.com/w3blogfr/zebra-zpl</url>
+	</scm>
+	
+	<developers>
+		<developer>
+			<id>w3blogfr</id>
+			<name>Thibaut Tropardy</name>
+			<organizationUrl>w3blog.fr</organizationUrl>
+		</developer>
+	</developers>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+  
+  <distributionManagement>
+	<snapshotRepository>
+		<id>sonatype-nexus-snapshots</id>
+		<name>Sonatype Nexus snapshot repository</name>
+		<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+	</snapshotRepository>
+	<repository>
+		<id>sonatype-nexus-staging</id>
+		<name>Sonatype Nexus release repository</name>
+		<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+	</repository>
+</distributionManagement>
 
   <dependencies>
     <dependency>
@@ -38,6 +70,48 @@
 				<target>1.6</target>
 			</configuration>
 		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-release-plugin</artifactId>
+			<version>2.2.2</version>
+			<configuration>
+				<arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
+			</configuration>
+		</plugin>
     </plugins>
   </build>
+  
+  <profiles>
+	<profile>
+		<id>release-sign-artifacts</id>
+		<activation>
+			<property>
+				<name>performRelease</name>
+				<value>true</value>
+			</property>
+		</activation>
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>1.4</version>
+					<configuration>
+						<passphrase>${gpg.passphrase}</passphrase>
+					</configuration>
+					<executions>
+						<execution>
+							<id>sign-artifacts</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>sign</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</build>
+	</profile>
+</profiles>
+  
 </project>
