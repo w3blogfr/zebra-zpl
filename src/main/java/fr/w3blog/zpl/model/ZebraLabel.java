@@ -165,7 +165,7 @@ public class ZebraLabel {
 	public String getZplCode() {
 		StringBuilder zpl = new StringBuilder();
 
-		zpl.append(ZplUtils.zplCommand("XA"));//Start Label
+		zpl.append(ZplUtils.zplCommandSautLigne("XA"));//Start Label
 		zpl.append(zebraPrintMode.getZplCode());
 
 		if (widthDots != null) {

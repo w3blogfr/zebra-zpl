@@ -12,23 +12,6 @@ import fr.w3blog.zpl.constant.ZebraPPP;
 public class ZplUtils {
 
 	/**
-	 * Method to quickly generate zpl code with command and variable
-	 * 
-	 * @param command
-	 *            Command (without ^)
-	 * @param variables
-	 *            list variable
-	 * @return
-	 */
-	public static StringBuilder zplCommand(String command) {
-		StringBuilder zpl = new StringBuilder();
-		zpl.append("^");
-		zpl.append(command);
-		zpl.append("\n");
-		return zpl;
-	}
-
-	/**
 	 * Fonction called by zplCommand to cast variable object and ajust for zpl code
 	 * 
 	 * @param object
@@ -49,6 +32,37 @@ public class ZplUtils {
 		} else {
 			return "";
 		}
+	}
+
+	/**
+	 * Method to quickly generate zpl code with command and variable
+	 * 
+	 * @param command
+	 *            Command (without ^)
+	 * @param variables
+	 *            list variable
+	 * @return
+	 */
+	public static StringBuilder zplCommand(String command) {
+		StringBuilder zpl = new StringBuilder();
+		zpl.append("^");
+		zpl.append(command);
+		return zpl;
+	}
+
+	/**
+	 * Method to quickly generate zpl code with command and variable
+	 * 
+	 * @param command
+	 *            Command (without ^)
+	 * @param variables
+	 *            list variable
+	 * @return
+	 */
+	public static StringBuilder zplCommandSautLigne(String command) {
+		StringBuilder zpl = zplCommand(command);
+		zpl.append("\n");
+		return zpl;
 	}
 
 	/**

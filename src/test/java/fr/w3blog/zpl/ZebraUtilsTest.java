@@ -15,8 +15,12 @@ public class ZebraUtilsTest
 	 */
 	public void testZebraLabelAlone() {
 
-		assertEquals("^XA\n", ZplUtils.zplCommand("XA").toString());
-		assertEquals("^FT5,6\n", ZplUtils.zplCommand("FT", 5, 6).toString());
-		assertEquals("^FT5,,6\n", ZplUtils.zplCommand("FT", 5, null, 6).toString());
+		assertEquals("^XA", ZplUtils.zplCommand("XA").toString());
+		assertEquals("^FT5,6", ZplUtils.zplCommand("FT", 5, 6).toString());
+		assertEquals("^FT5,,6", ZplUtils.zplCommand("FT", 5, null, 6).toString());
+
+		assertEquals("^XA\n", ZplUtils.zplCommandSautLigne("XA").toString());
+		assertEquals("^FT5,6\n", ZplUtils.zplCommandSautLigne("FT", 5, 6).toString());
+		assertEquals("^FT5,,6\n", ZplUtils.zplCommandSautLigne("FT", 5, null, 6).toString());
 	}
 }

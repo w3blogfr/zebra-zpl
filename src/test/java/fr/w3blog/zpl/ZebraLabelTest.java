@@ -24,7 +24,7 @@ public class ZebraLabelTest
 	 */
 	public void testZebraLabelSize()
 	{
-		ZebraLabel zebraLabel = new ZebraLabel(760, 500);
+		ZebraLabel zebraLabel = new ZebraLabel(500, 760);
 		assertEquals("^XA\n^MMT\n^PW500\n^LL760\n^XZ\n", zebraLabel.getZplCode());
 	}
 }

@@ -6,7 +6,6 @@ import junit.framework.TestCase;
 import fr.w3blog.zpl.constant.ZebraFont;
 import fr.w3blog.zpl.model.ZebraLabel;
 import fr.w3blog.zpl.model.ZebraPrintException;
-import fr.w3blog.zpl.model.ZebraUtils;
 import fr.w3blog.zpl.model.element.ZebraBarCode39;
 import fr.w3blog.zpl.model.element.ZebraText;
 
@@ -18,7 +17,7 @@ import fr.w3blog.zpl.model.element.ZebraText;
  */
 public class ZebraPrinterTest extends TestCase {
 
-	private String ip = "155.132.246.4";
+	private String ip = "127.0.0.7";
 	private int port = 9100;
 
 	/**
@@ -48,6 +47,6 @@ public class ZebraPrinterTest extends TestCase {
 		zebraLabel.addElement(new ZebraText(10, 596, "Ref client:", 11));
 		zebraLabel.addElement(new ZebraText(180, 599, "1234", 11));
 
-		ZebraUtils.printZpl(zebraLabel, ip, port);
+		//ZebraUtils.printZpl(zebraLabel, ip, port);
 	}
 }

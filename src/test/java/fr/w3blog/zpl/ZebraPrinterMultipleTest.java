@@ -8,7 +8,6 @@ import junit.framework.TestCase;
 import fr.w3blog.zpl.constant.ZebraFont;
 import fr.w3blog.zpl.model.ZebraLabel;
 import fr.w3blog.zpl.model.ZebraPrintException;
-import fr.w3blog.zpl.model.ZebraUtils;
 import fr.w3blog.zpl.model.element.ZebraBarCode39;
 import fr.w3blog.zpl.model.element.ZebraText;
 
@@ -56,6 +55,6 @@ public class ZebraPrinterMultipleTest extends TestCase {
 		zebraLabels.add(zebraLabel);
 		zebraLabels.add(zebraLabel);
 
-		ZebraUtils.printZpl(zebraLabels, ip, port);
+		//ZebraUtils.printZpl(zebraLabels, ip, port);
 	}
 }
