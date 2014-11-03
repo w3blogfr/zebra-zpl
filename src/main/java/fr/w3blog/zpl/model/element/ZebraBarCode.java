@@ -30,7 +30,7 @@ public abstract class ZebraBarCode extends ZebraElement {
 	 * Parameters used to print text( default on bellow)
 	 * 
 	 */
-	boolean showTextInterpretation;
+	boolean showTextInterpretation = true;
 
 	/**
 	 * Parameters to set to true if you want textInterpretation above code (top)
@@ -82,6 +82,34 @@ public abstract class ZebraBarCode extends ZebraElement {
 		this.moduleWidth = moduleWidth;
 		this.wideBarRatio = wideBarRatio;
 	}
+	
+	   /**
+     * Default Constructor width position and text
+     * 
+     * @param positionX
+     *            left margin (explain in dots)
+     * @param positionY
+     *            top margin (explain in dots)
+     * @param text
+     *            code to write
+     * @param barCodeHeigth
+     *            height of code bar
+     * @param showTextInterpretation
+     *            true to print interpretation line
+     * @param moduleWidth
+     *            width(optionnal) of code bar
+     * @param wideBarRatio
+     *            wide bar to narrow bar width ratio
+     */
+    public ZebraBarCode(int positionX, int positionY, String text, int barCodeHeigth, boolean showTextInterpretation, int moduleWidth, int wideBarRatio) {
+        this.positionX = positionX;
+        this.positionY = positionY;
+        this.barCodeHeigth = barCodeHeigth;
+        this.showTextInterpretation = showTextInterpretation;
+        this.text = text;
+        this.moduleWidth = moduleWidth;
+        this.wideBarRatio = wideBarRatio;
+    }
 
 	/**
 	 * Constructeur used to print text (above or below) with code

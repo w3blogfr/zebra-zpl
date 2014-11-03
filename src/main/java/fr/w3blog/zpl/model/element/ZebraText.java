@@ -92,11 +92,11 @@ public class ZebraText extends ZebraElement {
 		if (fontSize != null && zebraFont != null) {
 			//This element has specified size and font
 			Integer[] dimension = ZplUtils.extractDotsFromFont(zebraFont, fontSize, printerOptions.getZebraPPP());
-			zpl.append(ZplUtils.zplCommand("A", zebraFont.getLetter(), zebraRotation.getLetter(), dimension[0], dimension[1]));
+			zpl.append(ZplUtils.zplCommand("A", zebraFont.getLetter() + zebraRotation.getLetter(), dimension[0], dimension[1]));
 		} else if (fontSize != null && printerOptions.getDefaultZebraFont() != null) {
 			//This element has specified size, but with default font
 			Integer[] dimension = ZplUtils.extractDotsFromFont(printerOptions.getDefaultZebraFont(), fontSize, printerOptions.getZebraPPP());
-			zpl.append(ZplUtils.zplCommand("A", printerOptions.getDefaultZebraFont().getLetter(), zebraRotation.getLetter(), dimension[0], dimension[1]));
+			zpl.append(ZplUtils.zplCommand("A", printerOptions.getDefaultZebraFont().getLetter() + zebraRotation.getLetter(), dimension[0], dimension[1]));
 		}
 
 		zpl.append("^FH\\^FD");//We allow hexadecimal and start element
