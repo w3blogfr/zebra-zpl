@@ -74,7 +74,6 @@ Other documentation
 =================
 
 Documentation about ZPL could be find here
+http://www.tracerplus.com/kb/Manuals/ZPL_Vol1.pdf
 
-http://www.ptshome.com/kb/Manuals/ZPL_Vol1.pdf
-
-http://www.ptshome.com/kb/Manuals/ZPL_Vol2.pdf
+http://www.tracerplus.com/kb/Manuals/ZPL_Vol2.pdf
