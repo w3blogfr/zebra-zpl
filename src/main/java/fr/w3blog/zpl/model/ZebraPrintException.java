@@ -7,6 +7,17 @@ package fr.w3blog.zpl.model;
  * 
  */
 public class ZebraPrintException extends Exception {
+
+	/**
+	 * Default Constructor
+	 * 
+	 * @param message
+	 *            message
+	 */
+	public ZebraPrintException(String message) {
+		super(message);
+	}
+
 	/**
 	 * Default Constructor
 	 * 

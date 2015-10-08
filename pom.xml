@@ -3,7 +3,7 @@
 
   <groupId>fr.w3blog</groupId>
   <artifactId>zebra-zpl</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.3-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>zebra-zpl</name>
