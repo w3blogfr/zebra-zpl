@@ -15,6 +15,10 @@ public class ZebraBarCode128 extends ZebraBarCode {
 
 	private boolean checkDigit43 = false;
 
+	public ZebraBarCode128(int positionX, int positionY, String text) {
+		super(positionX, positionY, text);
+	}
+
 	public ZebraBarCode128(int positionX, int positionY, String text, int barCodeHeigth) {
 		super(positionX, positionY, text, barCodeHeigth);
 	}
@@ -22,10 +26,10 @@ public class ZebraBarCode128 extends ZebraBarCode {
 	public ZebraBarCode128(int positionX, int positionY, String text, int barCodeHeigth, int barCodeWidth, int wideBarRatio) {
 		super(positionX, positionY, text, barCodeHeigth, barCodeWidth, wideBarRatio);
 	}
-	
+
 	public ZebraBarCode128(int positionX, int positionY, String text, int barCodeHeigth, boolean showTextInterpretation, int barCodeWidth, int wideBarRatio) {
-        super(positionX, positionY, text, barCodeHeigth, showTextInterpretation, barCodeWidth, wideBarRatio);
-    }
+		super(positionX, positionY, text, barCodeHeigth, showTextInterpretation, barCodeWidth, wideBarRatio);
+	}
 
 	public ZebraBarCode128(int positionX, int positionY, String text, int barCodeHeigth, int barCodeWidth, int wideBarRatio, boolean checkDigit43) {
 		super(positionX, positionY, text, barCodeHeigth, barCodeWidth, wideBarRatio);
@@ -39,7 +43,7 @@ public class ZebraBarCode128 extends ZebraBarCode {
 	@Override
 	public String getZplCode(PrinterOptions printerOptions) {
 		StringBuilder zpl = getStartZplCodeBuilder();
-		zpl.append(ZplUtils.zplCommandSautLigne("BC", zebraRotation.getLetter(), barCodeHeigth, checkDigit43, showTextInterpretation, showTextInterpretationAbove));
+		zpl.append(ZplUtils.zplCommandSautLigne("BC", zebraRotation.getLetter(), barCodeHeigth, showTextInterpretation, showTextInterpretationAbove, checkDigit43));
 		zpl.append("^FD");
 		zpl.append(text);
 		zpl.append(ZplUtils.zplCommandSautLigne("FS"));
