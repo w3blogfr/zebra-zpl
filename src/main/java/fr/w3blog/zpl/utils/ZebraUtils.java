@@ -62,10 +62,8 @@ public class ZebraUtils {
 	 * 
 	 * @param zpl
 	 *            code Zpl to print
-	 * @param ip
-	 *            ip adress
-	 * @param port
-	 *            port
+	 * @param printerName
+	 *	      name of the selected printer
 	 * @throws ZebraPrintException
 	 *             if zpl could not be printed
 	 */
@@ -79,7 +77,7 @@ public class ZebraUtils {
 			for (int i = 0; i < services.length; i++) {
 				PrintServiceAttribute attr = services[i].getAttribute(PrinterName.class);
 				sPrinterName = ((PrinterName) attr).getValue();
-				if (sPrinterName.toLowerCase().indexOf(printerName) >= 0) {
+				if (sPrinterName.toLowerCase().indexOf(printerName.toLowerCase()) >= 0) {
 					psZebra = services[i];
 					break;
 				}
