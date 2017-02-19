@@ -6,6 +6,8 @@ import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
+import fr.w3blog.zpl.constant.ZebraJustification;
+import fr.w3blog.zpl.constant.ZebraPPP;
 import fr.w3blog.zpl.utils.ZplUtils;
 
 public abstract class ZebraElement {
@@ -18,6 +20,10 @@ public abstract class ZebraElement {
 	 * y-axis location (in dots)
 	 */
 	protected Integer positionY;
+	/**
+	 * justification (left, right or auto)
+	 */
+	protected ZebraJustification justification = null;
 
 	/**
 	 * Will draw a default box on the graphic if drawGraphic method is not overload
@@ -58,6 +64,22 @@ public abstract class ZebraElement {
 	}
 
 	/**
+	 * @return the justification
+	 */
+	public ZebraJustification getJustification() {
+		return justification;
+	}
+
+	/**
+	 * @param justification
+	 *            the justification to set
+	 */
+	public ZebraElement setJustification(ZebraJustification justification) {
+		this.justification = justification;
+		return this;
+	}
+
+	/**
 	 * Return Zpl code for this Element
 	 * 
 	 * @return
@@ -75,7 +97,11 @@ public abstract class ZebraElement {
 
 		StringBuffer zpl = new StringBuffer("");
 		if (positionX != null && positionY != null) {
-			zpl.append(ZplUtils.zplCommand("FT", positionX, positionY));
+			if (justification != null) {
+				zpl.append(ZplUtils.zplCommand("FO", positionX, positionY, justification));
+			} else {
+				zpl.append(ZplUtils.zplCommand("FO", positionX, positionY));
+			}
 		}
 		return zpl.toString();
 	}

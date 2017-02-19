@@ -4,6 +4,8 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 
 import fr.w3blog.zpl.constant.ZebraFont;
+import fr.w3blog.zpl.constant.ZebraJustification;
+import fr.w3blog.zpl.constant.ZebraPPP;
 import fr.w3blog.zpl.constant.ZebraRotation;
 import fr.w3blog.zpl.model.PrinterOptions;
 import fr.w3blog.zpl.model.ZebraElement;
@@ -62,6 +64,14 @@ public class ZebraText extends ZebraElement {
 		this.text = text;
 		this.positionX = positionX;
 		this.positionY = positionY;
+	}
+
+	public ZebraText(int positionX, int positionY, String text, int fontSize, ZebraJustification justification) {
+		this.fontSize = fontSize;
+		this.text = text;
+		this.positionX = positionX;
+		this.positionY = positionY;
+		this.justification = justification;
 	}
 
 	public ZebraText(int positionX, int positionY, String text, ZebraFont zebraFont, int fontSize, ZebraRotation zebraRotation) {
