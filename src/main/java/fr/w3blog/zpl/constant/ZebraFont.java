@@ -27,4 +27,35 @@ public enum ZebraFont {
 		return "Arial";
 	}
 
+	static public ZebraFont getFont(String letter)
+	{
+		ZebraFont myFont = ZebraFont.ZEBRA_ZERO;
+		switch(letter){
+			case "0" :
+				myFont = ZebraFont.ZEBRA_ZERO;
+				break;
+			case "A" :
+				myFont = ZebraFont.ZEBRA_A;
+				break;
+			case "B" :
+				myFont = ZebraFont.ZEBRA_B;
+				break;
+			case "C" :
+				myFont = ZebraFont.ZEBRA_C;
+				break;
+			case "D" :
+				myFont = ZebraFont.ZEBRA_D;
+				break;
+			case "F" :
+				myFont = ZebraFont.ZEBRA_F;
+				break;
+			case "G" :
+				myFont = ZebraFont.ZEBRA_G;
+				break;
+			default :
+				myFont = ZebraFont.ZEBRA_ZERO;
+				break;
+		}
+		return myFont;
+	}
 }
