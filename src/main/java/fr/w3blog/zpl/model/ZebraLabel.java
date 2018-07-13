@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.w3blog.zpl.constant.ZebraFont;
+import fr.w3blog.zpl.constant.ZebraPaperType;
 import fr.w3blog.zpl.constant.ZebraPrintMode;
 import fr.w3blog.zpl.utils.ZplUtils;
 
@@ -25,6 +26,8 @@ public class ZebraLabel {
 	private Integer heightDots;
 
 	private ZebraPrintMode zebraPrintMode = ZebraPrintMode.TEAR_OFF;
+
+	private ZebraPaperType zebraPaperType = ZebraPaperType.CONTINUOUS;
 
 	private PrinterOptions printerOptions = new PrinterOptions();
 
@@ -148,6 +151,22 @@ public class ZebraLabel {
 	}
 
 	/**
+	 * @return the zebraPrintMode
+	 */
+	public ZebraPaperType getZebraPaperType() {
+		return zebraPaperType;
+	}
+
+	/**
+	 * @param zebraPaperType
+	 *            the zebraPaperType to set
+	 */
+	public ZebraLabel setZebraPaperType(ZebraPaperType zebraPaperType) {
+		this.zebraPaperType = zebraPaperType;
+		return this;
+	}
+
+	/**
 	 * @return the zebraElements
 	 */
 	public List<ZebraElement> getZebraElements() {
@@ -164,9 +183,13 @@ public class ZebraLabel {
 
 	public String getZplCode() {
 		StringBuilder zpl = new StringBuilder();
-
 		zpl.append(ZplUtils.zplCommandSautLigne("XA"));//Start Label
 		zpl.append(zebraPrintMode.getZplCode());
+		
+        //zpl.append("CT~~CD,~CC^~CT~"); //Put printer in ZPL Mode (necessary if it was previously set in Line Mode)
+		if(zebraPaperType!=null){
+			zpl.append(zebraPaperType.getZplCode());
+		}
 
 		if (widthDots != null) {
 			//Define width for label
