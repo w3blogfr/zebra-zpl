@@ -80,6 +80,6 @@ public class ZebraAFontElement extends ZebraElement {
 	 */
 	@Override
 	public String getZplCode(PrinterOptions printerOptions) {
-		return ZplUtils.zplCommandSautLigne("A", zebraFont.getLetter(), zebraRotation.getLetter(), dotHeigth, dotsWidth).toString();
+		return ZplUtils.zplCommandSautLigne(String.format("A%s", zebraFont.getLetter()), zebraRotation.getLetter(), dotHeigth, dotsWidth).toString();
 	}
 }
