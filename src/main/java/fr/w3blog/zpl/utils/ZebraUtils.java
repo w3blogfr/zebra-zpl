@@ -45,7 +45,7 @@ public class ZebraUtils {
 			try {
 				clientSocket = new Socket(ip, port);
 				DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-				outToServer.writeBytes(zpl);
+				outToServer.writeUTF(zpl);				
 				clientSocket.close();
 			} finally {
 				if (clientSocket != null) {
