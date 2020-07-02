@@ -27,6 +27,16 @@ public class PrinterOptions {
 		this.zebraPPP = zebraPPP;
 	}
 
+	public PrinterOptions(PrinterOptions printerOptions) {
+		if(printerOptions != null) {
+			this.zebraPPP = printerOptions.getZebraPPP();
+			this.defaultZebraFont = printerOptions.getDefaultZebraFont();
+			this.defaultFontSize = printerOptions.getDefaultFontSize();
+		} else {
+			throw new RuntimeException("PrinterOptions can not be null");
+		}
+	}
+
 	/**
 	 * @return the zebraPPP
 	 */

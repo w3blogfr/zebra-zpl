@@ -97,7 +97,7 @@ public class ZebraText extends ZebraElement {
 	@Override
 	public String getZplCode(PrinterOptions printerOptions) {
 		StringBuffer zpl = new StringBuffer();
-		zpl.append(this.getZplCodePosition());
+		zpl.append(this.getZplCodePosition(printerOptions.getZebraPPP()));
 		ZebraFont defaultZebraFont = printerOptions.getDefaultZebraFont();
 		Integer defaultFontSize = printerOptions.getDefaultFontSize();
 		ZebraPPP defaultZebraPPP = printerOptions.getZebraPPP();
