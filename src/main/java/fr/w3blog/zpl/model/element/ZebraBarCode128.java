@@ -4,12 +4,12 @@ import fr.w3blog.zpl.model.PrinterOptions;
 import fr.w3blog.zpl.utils.ZplUtils;
 
 /**
- * Element to create a bar code 128
- * 
+ * Element to create a bar code 128 subset B (default subset)
+ * <p>
  * Zpl command : ^BC
- * 
+ * <p>
  * @author matthiasvets
- * 
+ *
  */
 public class ZebraBarCode128 extends ZebraBarCode {
 
