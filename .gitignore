@@ -2,3 +2,8 @@
 target
 /bin
 bin
+.idea
+zebra-zpl.iml
+
+.settings
+.classpath
