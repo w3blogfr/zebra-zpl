@@ -9,7 +9,7 @@ import fr.w3blog.zpl.model.ZebraElement;
  * @author ttropard
  * 
  */
-public class ZebraNativeZpl extends ZebraElement {
+public class ZebraNativeZpl extends ZebraElement<ZebraNativeZpl> {
 
 	private String zplCode;
 
@@ -17,6 +17,11 @@ public class ZebraNativeZpl extends ZebraElement {
 		super();
 		this.zplCode = zplCode;
 		this.defaultDrawGraphic = false;
+	}
+
+	@Override
+	protected ZebraNativeZpl getThis() {
+		return this;
 	}
 
 	/* (non-Javadoc)

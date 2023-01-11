@@ -12,7 +12,7 @@ import fr.w3blog.zpl.utils.ZplUtils;
  * @author matthiasvets
  * 
  */
-public class ZebraGraficBox extends ZebraElement {
+public class ZebraGraficBox extends ZebraElement<ZebraGraficBox> {
 
     private Integer width;
     private Integer height;
@@ -27,6 +27,11 @@ public class ZebraGraficBox extends ZebraElement {
         this.borderTickness = borderTickness;
         this.lineColor = lineColor;
     }
+
+	@Override
+	protected ZebraGraficBox getThis() {
+		return this;
+	}
 
 
     /* (non-Javadoc)

@@ -69,6 +69,22 @@ You can also use usefull fonction ZplUtils.zplCommand to generate a zpl command 
 
   ZplUtils.zplCommand("A", "0", "R");
   //will return ^A,0,R
+  
+  
+Default Settings
+=================
+
+To avoid repetitive setting for each ZebraElement, you can change global configuration in ZebraDefaultSettings.
+
+```
+ZebraDefaultSettings.DEFAULT_ZEBRA_FIELD_POSITION = ZebraFieldPosition.FIELD_ORIGIN;
+```
+
+This code should be executed on startup or on the first usage, and it's valid for all the lifecycle of your application and all threads (static property). 
+
+If you want different property, you have to define it on each ZebraElement
+
+
 
 Other documentation
 =================

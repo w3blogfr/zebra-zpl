@@ -12,7 +12,7 @@ import fr.w3blog.zpl.utils.ZplUtils;
  *
  * @author foameraserblue
  */
-public class ZebraBarCode128A extends ZebraBarCode {
+public class ZebraBarCode128A extends ZebraBarCode<ZebraBarCode128A> {
     private boolean checkDigit43 = false;
 
     public ZebraBarCode128A(int positionX, int positionY, String text) {
@@ -40,7 +40,13 @@ public class ZebraBarCode128A extends ZebraBarCode {
         super(positionX, positionY, text, barCodeHeigth, showTextInterpretation, showTextInterpretationAbove);
     }
 
+
     @Override
+	protected ZebraBarCode128A getThis() {
+		return this;
+	}
+
+	@Override
     public String getZplCode(PrinterOptions printerOptions) {
         StringBuilder zpl = getStartZplCodeBuilder();
         zpl.append(ZplUtils.zplCommandSautLigne("BC", zebraRotation.getLetter(), barCodeHeigth, showTextInterpretation, showTextInterpretationAbove, checkDigit43));

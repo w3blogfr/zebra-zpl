@@ -18,11 +18,9 @@ import fr.w3blog.zpl.utils.ZplUtils;
  * @author ttropard
  * 
  */
-public class ZebraAFontElement extends ZebraElement {
+public class ZebraAFontElement extends ZebraElement<ZebraAFontElement> {
 
 	private ZebraFont zebraFont;
-
-	private ZebraRotation zebraRotation = ZebraRotation.NORMAL;
 
 	private int dotHeigth;
 	private int dotsWidth;
@@ -73,6 +71,11 @@ public class ZebraAFontElement extends ZebraElement {
 		this.zebraRotation = zebraRotation;
 		this.dotHeigth = dotHeigth;
 		this.dotsWidth = dotsWidth;
+	}
+
+	@Override
+	protected ZebraAFontElement getThis() {
+		return this;
 	}
 
 	/* (non-Javadoc)

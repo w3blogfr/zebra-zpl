@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 
-import fr.w3blog.zpl.constant.ZebraRotation;
 import fr.w3blog.zpl.model.PrinterOptions;
 import fr.w3blog.zpl.model.ZebraElement;
 import fr.w3blog.zpl.utils.ZplUtils;
@@ -17,14 +16,12 @@ import fr.w3blog.zpl.utils.ZplUtils;
  * @author ttropard
  * 
  */
-public abstract class ZebraBarCode extends ZebraElement {
+public abstract class ZebraBarCode<T extends ZebraBarCode<T>> extends ZebraElement<T> {
 
 	Integer barCodeHeigth;
 
 	Integer moduleWidth;
 	Integer wideBarRatio;
-
-	ZebraRotation zebraRotation = ZebraRotation.NORMAL;
 
 	/**
 	 * Parameters used to print text( default on bellow)
@@ -142,6 +139,8 @@ public abstract class ZebraBarCode extends ZebraElement {
 		this.showTextInterpretationAbove = showTextInterpretationAbove;
 	}
 
+	protected abstract T getThis();
+
 	public StringBuilder getStartZplCodeBuilder() {
 		StringBuilder zpl = new StringBuilder();
 		//On précise la position
@@ -191,10 +190,6 @@ public abstract class ZebraBarCode extends ZebraElement {
 		return wideBarRatio;
 	}
 
-	public ZebraRotation getZebraRotation() {
-		return zebraRotation;
-	}
-
 	public boolean isShowTextInterpretation() {
 		return showTextInterpretation;
 	}
@@ -207,39 +202,34 @@ public abstract class ZebraBarCode extends ZebraElement {
 		return text;
 	}
 
-	public ZebraBarCode setBarCodeWidth(Integer barCodeWidth) {
+	public T withBarCodeWidth(Integer barCodeWidth) {
 		this.moduleWidth = barCodeWidth;
-		return this;
+		return getThis();
 	}
 
-	public ZebraBarCode setBarCodeHeigth(Integer barCodeHeigth) {
+	public T withBarCodeHeigth(Integer barCodeHeigth) {
 		this.barCodeHeigth = barCodeHeigth;
-		return this;
+		return getThis();
 	}
 
-	public ZebraBarCode setWideBarRatio(Integer wideBarRatio) {
+	public T withWideBarRatio(Integer wideBarRatio) {
 		this.wideBarRatio = wideBarRatio;
-		return this;
+		return getThis();
 	}
 
-	public ZebraBarCode setZebraRotation(ZebraRotation zebraRotation) {
-		this.zebraRotation = zebraRotation;
-		return this;
-	}
-
-	public ZebraBarCode setShowTextInterpretation(boolean showTextInterpretation) {
+	public T withShowTextInterpretation(boolean showTextInterpretation) {
 		this.showTextInterpretation = showTextInterpretation;
-		return this;
+		return getThis();
 	}
 
-	public ZebraBarCode setShowTextInterpretationAbove(boolean showTextInterpretationAbove) {
+	public T withShowTextInterpretationAbove(boolean showTextInterpretationAbove) {
 		this.showTextInterpretationAbove = showTextInterpretationAbove;
-		return this;
+		return getThis();
 	}
 
-	public ZebraBarCode setText(String text) {
+	public T withText(String text) {
 		this.text = text;
-		return this;
+		return getThis();
 	}
 
 }

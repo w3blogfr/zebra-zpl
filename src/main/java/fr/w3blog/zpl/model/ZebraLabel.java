@@ -27,7 +27,7 @@ public class ZebraLabel {
 
 	private ZebraPrintMode zebraPrintMode = ZebraPrintMode.TEAR_OFF;
 
-	private ZebraPaperType zebraPaperType = ZebraPaperType.CONTINUOUS;
+	private ZebraPaperType zebraPaperType;
 
 	private PrinterOptions printerOptions = new PrinterOptions();
 

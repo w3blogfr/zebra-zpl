@@ -11,7 +11,7 @@ import fr.w3blog.zpl.utils.ZplUtils;
  * @author matthiasvets
  *
  */
-public class ZebraBarCode128 extends ZebraBarCode {
+public class ZebraBarCode128 extends ZebraBarCode<ZebraBarCode128> {
 
 	private boolean checkDigit43 = false;
 
@@ -38,6 +38,11 @@ public class ZebraBarCode128 extends ZebraBarCode {
 
 	public ZebraBarCode128(int positionX, int positionY, String text, int barCodeHeigth, boolean showTextInterpretation, boolean showTextInterpretationAbove) {
 		super(positionX, positionY, text, barCodeHeigth, showTextInterpretation, showTextInterpretationAbove);
+	}
+
+	@Override
+	protected ZebraBarCode128 getThis() {
+		return this;
 	}
 
 	@Override
