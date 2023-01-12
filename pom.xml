@@ -3,7 +3,7 @@
 
   <groupId>fr.w3blog</groupId>
   <artifactId>zebra-zpl</artifactId>
-  <version>0.0.4</version>
+  <version>0.0.5-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>zebra-zpl</name>
@@ -22,7 +22,7 @@
 		<connection>scm:git:git://github.com/w3blogfr/zebra-zpl.git</connection>
 		<developerConnection>scm:git:git@github.com:w3blogfr/zebra-zpl.git</developerConnection>
 		<url>http://github.com/w3blogfr/zebra-zpl</url>
-	  <tag>zebra-zpl-0.0.4</tag>
+	  <tag>HEAD</tag>
   </scm>
 	
 	<developers>
