@@ -85,6 +85,23 @@ This code should be executed on startup or on the first usage, and it's valid fo
 If you want different property, you have to define it on each ZebraElement
 
 
+Release new version
+=================
+
+Mainly follow instruction there
+https://central.sonatype.org/publish/publish-maven/
+
+For the final deploy step, please use profile release-sign-artifacts
+```
+mvn clean deploy -P release-sign-artifacts
+```
+
+Then connect to close and release version
+https://oss.sonatype.org/
+
+If no password, or forgot it, please go there.
+https://issues.sonatype.org/
+
 
 Other documentation
 =================
